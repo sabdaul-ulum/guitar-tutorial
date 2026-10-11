@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@400;500;600;650;700;750;800&display=swap');
+
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  --color-line: #e4e9e1;
+  --color-ink: #263d32;
+  --font-heading: Manrope, sans-serif;
+  --text-xs--line-height: normal;
+  --text-sm--line-height: normal;
+  --text-xl--line-height: normal;
+  --text-2xl--line-height: normal;
+}
+
+/* ponytail: Keep native control defaults; add Preflight only with visual regression coverage. */
+@layer base {
+  :root {
+    --bg: #f8f9f6;
+    --ink: #263d32;
+    --muted: #58675e;
+    --green: #3e6450;
+    --line: #e4e9e1;
+    --lime: #e5edce;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 25px;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 14px 'DM Sans', sans-serif;
+  }
+  button, a, input {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button, a {
+    transition: background 0.2s, transform 0.2s;
+  }
+  button {
+    font: inherit;
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  summary:focus-visible {
+    outline: 3px solid #607f49;
+    outline-offset: 3px;
+  }
+  h1, h2, h3, p {
+    margin: 0;
+  }
+  h1, h2, h3 {
+    font-family: Manrope, sans-serif;
+  }
+  p {
+    color: var(--muted);
+    line-height: 1.75;
+  }
+  progress, meter {
+    width: 100%;
+    accent-color: #729356;
+    margin: 12px 0;
+    height: 8px;
+  }
+  details {
+    font-size: 11px;
+    color: #77896b;
+    margin: 15px 0;
+  }
+  summary {
+    cursor: pointer;
+  }
+  details p, details button {
+    margin: 10px 5px 0 0;
+  }
+  input[type="checkbox"] {
+    accent-color: #637f4b;
+  }
+}
+
+/* Keyframe animations and motion reduction */
+@keyframes reward-pop {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes string-vibrate {
+  25% {
+    transform: translateX(-1px);
+  }
+  75% {
+    transform: translateX(1px);
+  }
+}
+
+/* Native dialog backdrop and animations */
+.success-dialog[open] {
+  animation: reward-pop 0.45s ease-out;
+}
+.success-dialog::backdrop {
+  background: #17251299;
+  backdrop-filter: blur(4px);
+}
+
+/* Dynamic rhythm track and tuner scale gradients */
+.track {
+  background: repeating-linear-gradient(90deg, transparent 0, transparent calc(25% - 1px), #eff1ea calc(25% - 1px), #eff1ea 25%);
+}
+.tuning-scale {
+  background: repeating-linear-gradient(90deg, #dbe4d3 0 1px, transparent 1px 10%);
+}
+.in-tune .tuning-needle {
+  background: #446139 !important;
+}
+
+/* ponytail: SVG string states retain CSS; migrate with animation-specific visual coverage. */
+.guitar-string {
+  stroke: #ddd7c9;
+}
+.string-active .guitar-string {
+  stroke: #a3e0bc;
+  filter: drop-shadow(0 0 2px #bdd0a3);
+}
+.string-sounding .guitar-string {
+  animation: string-vibrate 0.12s linear infinite;
+}
+.string-muted .guitar-string {
+  opacity: 0.3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+  .success-dialog[open],
+  .string-active .guitar-string,
+  .string-sounding .guitar-string {
+    animation: none;
+  }
+  .tuning-needle {
+    transition: none;
+  }
+}
