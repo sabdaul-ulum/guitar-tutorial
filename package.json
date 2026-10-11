@@ -1,0 +1,30 @@
+{
+  "name": "petik-guitar-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start --port 3000",
+    "test": "node --test features/*/domain/*.test.js features/audio/lib/*.test.js",
+    "check": "npm run typecheck && npm test && npm run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "meyda": "5.6.3",
+    "next": "16.4.0",
+    "pitchy": "4.1.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "postcss": "8.5.29",
+    "tailwindcss": "4.3.3",
+    "typescript": "^7.0.2"
+  }
+}
